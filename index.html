@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Salih. — Creative Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+
+<style>
+
+/* GENERAL */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #f7f7f4;
+  color: #171717;
+  font-family: 'DM Sans', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* HEADER */
+
+header {
+  padding: 27px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #deded9;
+  position: relative;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: -1.5px;
+}
+
+nav {
+  display: flex;
+  gap: 35px;
+}
+
+nav a {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transition: opacity .3s;
+}
+
+nav a:hover {
+  opacity: .45;
+}
+
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* HERO */
+
+.hero {
+  min-height: 85vh;
+  padding: 65px 7%;
+  display: grid;
+  grid-template-columns: 1fr .85fr;
+  align-items: center;
+  gap: 55px;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #888;
+  text-transform: uppercase;
+}
+
+.main-title {
+  font-size: clamp(80px, 11vw, 165px);
+  font-weight: 500;
+  letter-spacing: -10px;
+  line-height: .9;
+  margin: 40px 0;
+}
+
+.main-title span {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.hero-content p {
+  max-width: 340px;
+  color: #777;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.explore {
+  display: inline-block;
+  margin-top: 40px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid #171717;
+  font-size: 10px;
+  letter-spacing: 2px;
+  transition: opacity .3s;
+}
+
+.explore:hover {
+  opacity: .5;
+}
+
+.hero-image {
+  height: 720px;
+  overflow: hidden;
+  background: #111;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  display: block;
+}
+
+/* PROJECTS */
+
+section {
+  padding: 100px 7%;
+}
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 45px;
+}
+
+.section-title h2 {
+  font-size: 35px;
+  font-weight: 500;
+  letter-spacing: -1.5px;
+}
+
+.section-title span {
+  font-size: 10px;
+  color: #888;
+  letter-spacing: 1px;
+}
+
+.projects {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px 25px;
+}
+
+.project {
+  overflow: hidden;
+}
+
+.project img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  background: #e5e5e0;
+  transition: transform .6s;
+}
+
+.project:hover img {
+  transform: scale(1.035);
+}
+
+.project-info {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+
+.project-info h3 {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.project-info p {
+  font-size: 11px;
+  color: #888;
+  margin-top: 7px;
+}
+
+.project-number {
+  font-size: 11px;
+  color: #888;
+}
+
+/* ABOUT */
+
+.about {
+  background: #eaeae5;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.about h2 {
+  font-size: clamp(45px, 6vw, 78px);
+  line-height: 1.05;
+  letter-spacing: -3px;
+  font-weight: 500;
+  margin-top: 30px;
+}
+
+.about h2 span {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+}
+
+.about-text {
+  font-size: 14px;
+  line-height: 2;
+  color: #666;
+}
+
+.about-text p + p {
+  margin-top: 22px;
+}
+
+/* CONTACT */
+
+.contact {
+  text-align: center;
+  padding: 140px 7%;
+}
+
+.contact h2 {
+  font-size: clamp(50px, 8vw, 105px);
+  letter-spacing: -5px;
+  line-height: 1;
+  font-weight: 500;
+  margin-top: 35px;
+}
+
+.contact h2 span {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+}
+
+.contact a {
+  display: inline-block;
+  margin-top: 45px;
+  border-bottom: 1px solid #171717;
+  padding-bottom: 9px;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+/* FOOTER */
+
+footer {
+  padding: 30px 7%;
+  border-top: 1px solid #deded9;
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #888;
+  letter-spacing: 1px;
+}
+
+/* MOBILE */
+
+@media(max-width: 700px) {
+
+  header {
+    padding: 24px 6%;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  nav {
+    display: none;
+    position: absolute;
+    top: 75px;
+    right: 6%;
+    background: #f7f7f4;
+    border: 1px solid #ddd;
+    padding: 25px;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  nav.active {
+    display: flex;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 75px 6%;
+    gap: 45px;
+  }
+
+  .main-title {
+    font-size: 105px;
+    letter-spacing: -6px;
+    margin: 35px 0;
+  }
+
+  .hero-image {
+    height: 580px;
+  }
+
+  section {
+    padding: 75px 6%;
+  }
+
+  .projects {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+
+  .about {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .contact {
+    padding: 110px 6%;
+  }
+
+  .contact h2 {
+    letter-spacing: -3px;
+  }
+
+  footer {
+    padding: 25px 6%;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+  <a href="#" class="logo">Salih.</a>
+
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+  <nav id="navigation">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+</header>
+
+
+<!-- HERO -->
+
+<main>
+
+<div class="hero">
+
+  <div class="hero-content">
+
+    <div class="eyebrow">
+      INDEPENDENT CREATIVE — MUNICH
+    </div>
+
+    <h1 class="main-title">
+      Salih<span>.</span>
+    </h1>
+
+    <p>
+      Exploring photography, visual culture,
+      architecture and creative expression.
+      Based in Munich, Germany.
+    </p>
+
+    <a href="#work" class="explore">
+      EXPLORE MY WORK ↗
+    </a>
+
+  </div>
+
+  <div class="hero-image">
+    <img
+  src="https://raw.githubusercontent.com/karakaplannsalih/salih-portfolio/main/406013A9-2883-485C-AD9F-4BD9A7340CC7.PNG"
+  alt="Salih — Portrait"
+>
+  </div>
+
+</div>
+
+
+<!-- WORK -->
+
+<section id="work">
+
+  <div class="section-title">
+    <h2>Selected Work</h2>
+    <span>01 — 04</span>
+  </div>
+
+  <div class="projects">
+
+    <article class="project">
+
+      <img
+        src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=1200"
+        alt="Architecture">
+
+      <div class="project-info">
+        <div>
+          <h3>Urban Perspectives</h3>
+          <p>Photography / Architecture</p>
+        </div>
+        <span class="project-number">01</span>
+      </div>
+
+    </article>
+
+
+    <article class="project">
+
+      <img
+        src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200"
+        alt="Fashion">
+
+      <div class="project-info">
+        <div>
+          <h3>Visual Identity</h3>
+          <p>Art Direction / Fashion</p>
+        </div>
+        <span class="project-number">02</span>
+      </div>
+
+    </article>
+
+
+    <article class="project">
+
+      <img
+        src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1200"
+        alt="Landscape">
+
+      <div class="project-info">
+        <div>
+          <h3>Quiet Moments</h3>
+          <p>Photography / Travel</p>
+        </div>
+        <span class="project-number">03</span>
+      </div>
+
+    </article>
+
+
+    <article class="project">
+
+      <img
+        src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1200"
+        alt="Art">
+
+      <div class="project-info">
+        <div>
+          <h3>Creative Studies</h3>
+          <p>Design / Experimentation</p>
+        </div>
+        <span class="project-number">04</span>
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section class="about" id="about">
+
+  <div>
+
+    <div class="eyebrow">
+      A LITTLE ABOUT ME
+    </div>
+
+    <h2>
+      Curiosity<br>
+      creates <span>perspective.</span>
+    </h2>
+
+  </div>
+
+  <div class="about-text">
+
+    <p>
+      I am an independent creative interested
+      in visual culture, photography,
+      architecture and the relationship
+      between aesthetics and everyday life.
+    </p>
+
+    <p>
+      My work is driven by curiosity,
+      observation and a constant desire
+      to explore new perspectives.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section class="contact" id="contact">
+
+  <div class="eyebrow">
+    HAVE A PROJECT IN MIND?
+  </div>
+
+  <h2>
+    Let's create<br>
+    <span>something.</span>
+  </h2>
+
+  <a href="mailto:hello@example.com">
+    GET IN TOUCH ↗
+  </a>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  <span>© 2026 — SALIH.</span>
+
+  <span>BASED IN MUNICH</span>
+
+</footer>
+
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+function toggleMenu() {
+
+  document
+    .getElementById("navigation")
+    .classList.toggle("active");
+
+}
+
+</script>
+
+</body>
+</html>
