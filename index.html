@@ -1,18 +1,25 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Salih. — Creative Portfolio</title>
 
+<meta name="description" content="Salih — Independent Creative Portfolio based in Munich.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
 
 <style>
 
-/* GENERAL */
+/* =========================
+   GLOBAL
+========================= */
 
 * {
   margin: 0;
@@ -30,21 +37,117 @@ body {
   font-family: 'DM Sans', sans-serif;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+body.loading {
+  overflow: hidden;
 }
 
-/* HEADER */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: #171717;
+  color: #fff;
+}
+
+
+/* =========================
+   CINEMATIC INTRO
+========================= */
+
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #101010;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    opacity 1s ease,
+    visibility 1s ease;
+}
+
+.intro-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.intro-name {
+  color: #f7f7f4;
+  font-size: clamp(65px, 10vw, 120px);
+  font-weight: 400;
+  letter-spacing: -7px;
+
+  opacity: 0;
+  transform: translateY(25px);
+
+  animation: revealName 1.3s ease forwards;
+}
+
+.intro-line {
+  width: 0;
+  height: 1px;
+  background: #aaa;
+  margin-top: 28px;
+
+  animation: expandLine 1.2s ease .5s forwards;
+}
+
+.intro-caption {
+  color: #888;
+  font-size: 9px;
+  letter-spacing: 4px;
+  margin-top: 22px;
+
+  opacity: 0;
+  animation: revealCaption 1s ease 1s forwards;
+}
+
+@keyframes revealName {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes expandLine {
+  to {
+    width: 180px;
+  }
+}
+
+@keyframes revealCaption {
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* =========================
+   HEADER
+========================= */
 
 header {
   padding: 27px 7%;
+
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+
   border-bottom: 1px solid #deded9;
   position: relative;
-  z-index: 10;
+  z-index: 100;
 }
 
 .logo {
@@ -55,13 +158,13 @@ header {
 
 nav {
   display: flex;
-  gap: 35px;
+  gap: 38px;
 }
 
 nav a {
-  font-size: 11px;
-  text-transform: uppercase;
+  font-size: 10px;
   letter-spacing: 1.5px;
+  text-transform: uppercase;
   transition: opacity .3s;
 }
 
@@ -71,27 +174,46 @@ nav a:hover {
 
 .menu-btn {
   display: none;
-  background: none;
   border: none;
+  background: none;
   font-size: 24px;
   cursor: pointer;
 }
 
-/* HERO */
+
+/* =========================
+   HERO
+========================= */
 
 .hero {
   min-height: 85vh;
   padding: 65px 7%;
+
   display: grid;
   grid-template-columns: 1fr .85fr;
   align-items: center;
   gap: 55px;
+
   overflow: hidden;
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
+
+  animation: heroReveal 1.2s ease .3s both;
+}
+
+@keyframes heroReveal {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .eyebrow {
@@ -103,7 +225,7 @@ nav a:hover {
 
 .main-title {
   font-size: clamp(80px, 11vw, 165px);
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: -10px;
   line-height: .9;
   margin: 40px 0;
@@ -112,11 +234,10 @@ nav a:hover {
 .main-title span {
   font-family: 'Playfair Display', serif;
   font-style: italic;
-  font-weight: 500;
 }
 
 .hero-content p {
-  max-width: 340px;
+  max-width: 350px;
   color: #777;
   font-size: 14px;
   line-height: 1.9;
@@ -126,9 +247,12 @@ nav a:hover {
   display: inline-block;
   margin-top: 40px;
   padding-bottom: 9px;
+
   border-bottom: 1px solid #171717;
+
   font-size: 10px;
   letter-spacing: 2px;
+
   transition: opacity .3s;
 }
 
@@ -140,6 +264,20 @@ nav a:hover {
   height: 720px;
   overflow: hidden;
   background: #111;
+
+  animation: imageReveal 1.5s ease .4s both;
+}
+
+@keyframes imageReveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero-image img {
@@ -147,10 +285,18 @@ nav a:hover {
   height: 100%;
   object-fit: cover;
   object-position: center 35%;
-  display: block;
+
+  transition: transform 1s ease;
 }
 
-/* PROJECTS */
+.hero-image:hover img {
+  transform: scale(1.025);
+}
+
+
+/* =========================
+   PROJECTS
+========================= */
 
 section {
   padding: 100px 7%;
@@ -165,7 +311,7 @@ section {
 
 .section-title h2 {
   font-size: 35px;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: -1.5px;
 }
 
@@ -185,17 +331,22 @@ section {
   overflow: hidden;
 }
 
-.project img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  display: block;
+.project-image {
+  overflow: hidden;
   background: #e5e5e0;
-  transition: transform .6s;
+  aspect-ratio: 4 / 3;
 }
 
-.project:hover img {
-  transform: scale(1.035);
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  transition: transform .7s ease;
+}
+
+.project:hover .project-image img {
+  transform: scale(1.04);
 }
 
 .project-info {
@@ -220,10 +371,14 @@ section {
   color: #888;
 }
 
-/* ABOUT */
+
+/* =========================
+   ABOUT
+========================= */
 
 .about {
   background: #eaeae5;
+
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 80px;
@@ -234,7 +389,7 @@ section {
   font-size: clamp(45px, 6vw, 78px);
   line-height: 1.05;
   letter-spacing: -3px;
-  font-weight: 500;
+  font-weight: 400;
   margin-top: 30px;
 }
 
@@ -253,7 +408,10 @@ section {
   margin-top: 22px;
 }
 
-/* CONTACT */
+
+/* =========================
+   CONTACT
+========================= */
 
 .contact {
   text-align: center;
@@ -264,7 +422,7 @@ section {
   font-size: clamp(50px, 8vw, 105px);
   letter-spacing: -5px;
   line-height: 1;
-  font-weight: 500;
+  font-weight: 400;
   margin-top: 35px;
 }
 
@@ -276,25 +434,41 @@ section {
 .contact a {
   display: inline-block;
   margin-top: 45px;
+
   border-bottom: 1px solid #171717;
   padding-bottom: 9px;
+
   font-size: 11px;
   letter-spacing: 2px;
+
+  transition: opacity .3s;
 }
 
-/* FOOTER */
+.contact a:hover {
+  opacity: .5;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
 
 footer {
   padding: 30px 7%;
   border-top: 1px solid #deded9;
+
   display: flex;
   justify-content: space-between;
+
   font-size: 10px;
   color: #888;
   letter-spacing: 1px;
 }
 
-/* MOBILE */
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width: 700px) {
 
@@ -308,12 +482,16 @@ footer {
 
   nav {
     display: none;
+
     position: absolute;
     top: 75px;
     right: 6%;
+
     background: #f7f7f4;
     border: 1px solid #ddd;
+
     padding: 25px;
+
     flex-direction: column;
     gap: 25px;
   }
@@ -367,31 +545,83 @@ footer {
   }
 }
 
+
+/* REDUCED MOTION */
+
+@media(prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+}
+
 </style>
 </head>
 
-<body>
 
-<!-- HEADER -->
+<body class="loading">
+
+
+<!-- =========================
+     INTRO SCREEN
+========================= -->
+
+<div class="intro-screen" id="intro">
+
+  <div class="intro-name">Salih.</div>
+
+  <div class="intro-line"></div>
+
+  <div class="intro-caption">
+    INDEPENDENT CREATIVE — MUNICH
+  </div>
+
+</div>
+
+
+<!-- =========================
+     HEADER
+========================= -->
 
 <header>
 
   <a href="#" class="logo">Salih.</a>
 
-  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  <button
+    class="menu-btn"
+    onclick="toggleMenu()"
+    aria-label="Toggle navigation"
+    aria-expanded="false"
+    id="menuButton"
+  >
+    ☰
+  </button>
 
   <nav id="navigation">
-    <a href="#work">Work</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+
+    <a href="#work" onclick="closeMenu()">Work</a>
+
+    <a href="#about" onclick="closeMenu()">About</a>
+
+    <a href="#contact" onclick="closeMenu()">Contact</a>
+
   </nav>
 
 </header>
 
 
-<!-- HERO -->
-
 <main>
+
+
+<!-- =========================
+     HERO
+========================= -->
 
 <div class="hero">
 
@@ -417,39 +647,58 @@ footer {
 
   </div>
 
+
   <div class="hero-image">
+
     <img
-  src="https://raw.githubusercontent.com/karakaplannsalih/salih-portfolio/main/406013A9-2883-485C-AD9F-4BD9A7340CC7.PNG"
-  alt="Salih — Portrait"
->
+      src="https://raw.githubusercontent.com/karakaplannsalih/salih-portfolio/main/406013A9-2883-485C-AD9F-4BD9A7340CC7.PNG"
+      alt="Salih — Portrait"
+    >
+
   </div>
 
 </div>
 
 
-<!-- WORK -->
+<!-- =========================
+     WORK
+========================= -->
 
 <section id="work">
 
   <div class="section-title">
+
     <h2>Selected Work</h2>
+
     <span>01 — 04</span>
+
   </div>
+
 
   <div class="projects">
 
+
     <article class="project">
 
-      <img
-        src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=1200"
-        alt="Architecture">
+      <div class="project-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=1200"
+          alt="Urban architecture"
+          loading="lazy"
+        >
+
+      </div>
 
       <div class="project-info">
+
         <div>
           <h3>Urban Perspectives</h3>
           <p>Photography / Architecture</p>
         </div>
+
         <span class="project-number">01</span>
+
       </div>
 
     </article>
@@ -457,16 +706,25 @@ footer {
 
     <article class="project">
 
-      <img
-        src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200"
-        alt="Fashion">
+      <div class="project-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200"
+          alt="Fashion editorial"
+          loading="lazy"
+        >
+
+      </div>
 
       <div class="project-info">
+
         <div>
           <h3>Visual Identity</h3>
           <p>Art Direction / Fashion</p>
         </div>
+
         <span class="project-number">02</span>
+
       </div>
 
     </article>
@@ -474,16 +732,25 @@ footer {
 
     <article class="project">
 
-      <img
-        src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1200"
-        alt="Landscape">
+      <div class="project-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1200"
+          alt="Landscape photography"
+          loading="lazy"
+        >
+
+      </div>
 
       <div class="project-info">
+
         <div>
           <h3>Quiet Moments</h3>
           <p>Photography / Travel</p>
         </div>
+
         <span class="project-number">03</span>
+
       </div>
 
     </article>
@@ -491,26 +758,38 @@ footer {
 
     <article class="project">
 
-      <img
-        src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1200"
-        alt="Art">
+      <div class="project-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1200"
+          alt="Creative art"
+          loading="lazy"
+        >
+
+      </div>
 
       <div class="project-info">
+
         <div>
           <h3>Creative Studies</h3>
           <p>Design / Experimentation</p>
         </div>
+
         <span class="project-number">04</span>
+
       </div>
 
     </article>
+
 
   </div>
 
 </section>
 
 
-<!-- ABOUT -->
+<!-- =========================
+     ABOUT
+========================= -->
 
 <section class="about" id="about">
 
@@ -526,6 +805,7 @@ footer {
     </h2>
 
   </div>
+
 
   <div class="about-text">
 
@@ -547,7 +827,9 @@ footer {
 </section>
 
 
-<!-- CONTACT -->
+<!-- =========================
+     CONTACT
+========================= -->
 
 <section class="contact" id="contact">
 
@@ -566,10 +848,13 @@ footer {
 
 </section>
 
+
 </main>
 
 
-<!-- FOOTER -->
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
@@ -580,19 +865,59 @@ footer {
 </footer>
 
 
-<!-- JAVASCRIPT -->
+<!-- =========================
+     JAVASCRIPT
+========================= -->
 
 <script>
 
+/* MOBILE MENU */
+
 function toggleMenu() {
+
+  const nav = document.getElementById("navigation");
+  const button = document.getElementById("menuButton");
+
+  nav.classList.toggle("active");
+
+  button.setAttribute(
+    "aria-expanded",
+    nav.classList.contains("active")
+  );
+
+}
+
+function closeMenu() {
 
   document
     .getElementById("navigation")
-    .classList.toggle("active");
+    .classList.remove("active");
+
+  document
+    .getElementById("menuButton")
+    .setAttribute("aria-expanded", "false");
 
 }
+
+
+/* CINEMATIC INTRO */
+
+window.addEventListener("load", function() {
+
+  const intro = document.getElementById("intro");
+
+  setTimeout(function() {
+
+    intro.classList.add("hidden");
+
+    document.body.classList.remove("loading");
+
+  }, 2500);
+
+});
 
 </script>
 
 </body>
 </html>
+
