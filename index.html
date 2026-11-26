@@ -7,7 +7,8 @@
 <title>Salih. — Visual Journal</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
 <style>
 :root {
@@ -91,15 +92,34 @@ header {
   border-bottom: 1px solid var(--line);
 }
 
+.logo-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
 .logo {
   font-family: 'Playfair Display', serif;
   font-size: 27px;
+}
+
+.current-language {
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--muted);
 }
 
 .header-note {
   font-size: 9px;
   letter-spacing: 2px;
   color: var(--muted);
+}
+
+.header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 13px;
 }
 
 nav {
@@ -111,6 +131,34 @@ nav a {
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
+}
+
+.language-switch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.language-switch button {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color .2s;
+}
+
+.language-switch button.active {
+  color: var(--ink);
+}
+
+.language-switch span {
+  font-size: 10px;
+  color: var(--line);
 }
 
 /* HERO */
@@ -268,10 +316,6 @@ nav a {
   aspect-ratio: 4 / 5;
 }
 
-.item:nth-child(2) .item-image {
-  aspect-ratio: 4 / 5;
-}
-
 .item img {
   width: 100%;
   height: 100%;
@@ -363,8 +407,16 @@ nav a {
   font-weight: 400;
 }
 
-.contact a {
-  display: inline-block;
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.contact-links a {
+  display: block;
+  width: fit-content;
   margin-top: 45px;
   padding-bottom: 8px;
   border-bottom: 1px solid;
@@ -389,18 +441,31 @@ footer {
 @media(max-width: 700px) {
   header {
     padding: 20px 6%;
+    align-items: flex-start;
   }
 
   .header-note {
     display: none;
   }
 
+  .header-right {
+    gap: 12px;
+  }
+
   nav {
-    gap: 14px;
+    gap: 12px;
   }
 
   nav a {
     font-size: 8px;
+  }
+
+  .language-switch {
+    gap: 8px;
+  }
+
+  .language-switch button {
+    font-size: 9px;
   }
 
   .hero {
@@ -442,6 +507,15 @@ footer {
     font-size: 40px;
   }
 
+  .section-heading {
+    gap: 15px;
+  }
+
+  .section-heading span {
+    text-align: right;
+    font-size: 8px;
+  }
+
   .gallery {
     grid-template-columns: 1fr;
     gap: 55px;
@@ -475,19 +549,6 @@ footer {
     scroll-behavior: auto !important;
   }
 }
-
-.contact-links {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  gap: 18px !important;
-}
-
-.contact-links a {
-  display: block !important;
-  width: fit-content;
-}
-  
 </style>
 </head>
 
@@ -497,19 +558,34 @@ footer {
 
 <div class="intro" id="intro">
   <h1>Salih.</h1>
-  <p>AN INDEPENDENT VISUAL JOURNAL</p>
+  <p data-i18n="introText">AN INDEPENDENT VISUAL JOURNAL</p>
 </div>
 
 <!-- HEADER -->
 
 <header>
-  <a href="#" class="logo">Salih.</a>
-  <div class="header-note">INDEPENDENT CREATIVE JOURNAL</div>
-  <nav>
-    <a href="#work">Selected Work</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <div class="logo-wrap">
+    <a href="#" class="logo">Salih.</a>
+    <span class="current-language" id="currentLanguage">ENGLISH</span>
+  </div>
+
+  <div class="header-right">
+    <nav>
+      <a href="#work" data-i18n="navWork">Selected Work</a>
+      <a href="#about" data-i18n="navAbout">About</a>
+      <a href="#contact" data-i18n="navContact">Contact</a>
+    </nav>
+
+    <div class="language-switch" aria-label="Select language">
+      <button data-lang="en" class="active">EN</button>
+      <span>|</span>
+      <button data-lang="de">DE</button>
+      <span>|</span>
+      <button data-lang="tr">TR</button>
+      <span>|</span>
+      <button data-lang="fr">FR</button>
+    </div>
+  </div>
 </header>
 
 <main>
@@ -517,21 +593,17 @@ footer {
 <!-- HERO -->
 
 <section class="hero">
-
   <div class="hero-meta">
-    <span>VOL. 01 — 2026</span>
-    <span>VISUAL CULTURE / PERSONAL ARCHIVE</span>
+    <span data-i18n="volume">VOL. 01 — 2026</span>
+    <span data-i18n="visualCulture">VISUAL CULTURE / PERSONAL ARCHIVE</span>
   </div>
 
   <h1 class="hero-title">Salih<span>.</span></h1>
 
   <div class="hero-layout">
-
     <div class="hero-side">
-      <strong>ABOUT THE JOURNAL</strong>
-      A personal exploration of
-      aesthetics, identity, visual
-      culture and contemporary life.
+      <strong data-i18n="journalAbout">ABOUT THE JOURNAL</strong>
+      <span data-i18n="journalDescription">A personal exploration of aesthetics, identity, visual culture and contemporary life.</span>
     </div>
 
     <div>
@@ -543,64 +615,51 @@ footer {
       </div>
 
       <div class="hero-bottom">
-        <span>FIG. 001 — PORTRAIT STUDY</span>
-        <span>MUNICH, GERMANY</span>
+        <span data-i18n="portrait">FIG. 001 — PORTRAIT STUDY</span>
+        <span data-i18n="location">MUNICH, GERMANY</span>
       </div>
     </div>
 
     <div class="hero-side">
-      <strong>CREATIVE INTERESTS</strong>
-      Photography<br>
-      Architecture<br>
-      Design<br>
-      Visual storytelling
+      <strong data-i18n="interests">CREATIVE INTERESTS</strong>
+      <span data-i18n="interestList">Photography<br>Architecture<br>Design<br>Visual storytelling</span>
     </div>
-
   </div>
-
 </section>
 
 <!-- MANIFESTO -->
 
 <section class="manifesto">
+  <div class="manifesto-label" data-i18n="manifestoLabel">A PERSONAL MANIFESTO</div>
 
-  <div class="manifesto-label">
-    A PERSONAL MANIFESTO
-  </div>
-
-  <h2>
+  <h2 data-i18n="manifestoTitle">
     Beauty lies in the details.<br>
     <em>Meaning lies beneath.</em>
   </h2>
 
-  <p>
-    An ongoing exploration of the relationship
-    between visual expression, culture,
-    architecture and everyday life.
+  <p data-i18n="manifestoText">
+    An ongoing exploration of the relationship between visual expression, culture, architecture and everyday life.
   </p>
-
 </section>
 
 <!-- WORK -->
 
 <section class="work" id="work">
-
   <div class="section-heading">
-    <h2>Selected Work</h2>
-    <span>AN ONGOING ARCHIVE — 001 / 004</span>
+    <h2 data-i18n="workTitle">Selected Work</h2>
+    <span data-i18n="archive">AN ONGOING ARCHIVE — 001 / 004</span>
   </div>
 
   <div class="gallery">
-
     <article class="item">
       <div class="item-image">
         <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=1200" alt="Architecture" loading="lazy">
       </div>
       <div class="item-meta">
-        <span>ARCHITECTURE</span>
+        <span data-i18n="category1">ARCHITECTURE</span>
         <span>001</span>
       </div>
-      <h3>Urban Perspectives</h3>
+      <h3 data-i18n="project1">Urban Perspectives</h3>
     </article>
 
     <article class="item">
@@ -608,10 +667,10 @@ footer {
         <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200" alt="Fashion" loading="lazy">
       </div>
       <div class="item-meta">
-        <span>FASHION / ART DIRECTION</span>
+        <span data-i18n="category2">FASHION / ART DIRECTION</span>
         <span>002</span>
       </div>
-      <h3>Visual Identity</h3>
+      <h3 data-i18n="project2">Visual Identity</h3>
     </article>
 
     <article class="item">
@@ -619,10 +678,10 @@ footer {
         <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1200" alt="Landscape" loading="lazy">
       </div>
       <div class="item-meta">
-        <span>PHOTOGRAPHY</span>
+        <span data-i18n="category3">PHOTOGRAPHY</span>
         <span>003</span>
       </div>
-      <h3>Quiet Moments</h3>
+      <h3 data-i18n="project3">Quiet Moments</h3>
     </article>
 
     <article class="item">
@@ -630,23 +689,20 @@ footer {
         <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1200" alt="Art" loading="lazy">
       </div>
       <div class="item-meta">
-        <span>CREATIVE STUDIES</span>
+        <span data-i18n="category4">CREATIVE STUDIES</span>
         <span>004</span>
       </div>
-      <h3>Beyond Form</h3>
+      <h3 data-i18n="project4">Beyond Form</h3>
     </article>
-
   </div>
-
 </section>
 
 <!-- ABOUT -->
 
 <section class="about" id="about">
-
   <div>
-    <div class="about-heading">A LITTLE ABOUT ME — 001</div>
-    <h2>
+    <div class="about-heading" data-i18n="aboutLabel">A LITTLE ABOUT ME — 001</div>
+    <h2 data-i18n="aboutTitle">
       Observing<br>
       the <em>world</em><br>
       differently.
@@ -654,54 +710,44 @@ footer {
   </div>
 
   <div class="about-copy">
-    <p>
-      I am an independent creative based in Munich,
-      interested in photography, architecture,
-      visual culture and design.
+    <p data-i18n="about1">
+      I am an independent creative based in Munich, interested in photography, architecture, visual culture and design.
     </p>
 
-    <p>
-      I find inspiration in the ordinary:
-      the geometry of a building, the character
-      of a photograph, the atmosphere of a place
-      and the stories hidden in everyday life.
+    <p data-i18n="about2">
+      I find inspiration in the ordinary: the geometry of a building, the character of a photograph, the atmosphere of a place and the stories hidden in everyday life.
     </p>
 
-    <p>
-      This journal is a collection of observations,
-      experiments and creative explorations.
+    <p data-i18n="about3">
+      This journal is a collection of observations, experiments and creative explorations.
     </p>
   </div>
-
 </section>
 
 <!-- CONTACT -->
 
 <section class="contact" id="contact">
-
-  <div class="contact-label">
+  <div class="contact-label" data-i18n="contactLabel">
     FOR COLLABORATIONS & INQUIRIES
   </div>
 
-  <h2>
+  <h2 data-i18n="contactTitle">
     Let's start<br>
     <em>a conversation.</em>
   </h2>
 
+  <div class="contact-links">
+    <a href="mailto:creative.salih@gmail.com?subject=Professional%20Inquiry" data-i18n="getInTouch">
+      GET IN TOUCH ↗
+    </a>
 
- 
-<div class="contact-links">
-  <a href="mailto:creative.salih@gmail.com?subject=Professional%20Inquiry">
-    GET IN TOUCH ↗
-  </a>
-
-  <a href="https://www.linkedin.com/in/salihkarakaplan/"
-     target="_blank"
-     rel="noopener noreferrer">
-    A CONNECTION WORTH MAKING ↗
-  </a>
-</div>
- 
+    <a href="https://www.linkedin.com/in/salihkarakaplan/"
+       target="_blank"
+       rel="noopener noreferrer"
+       data-i18n="linkedin">
+      A CONNECTION WORTH MAKING ↗
+    </a>
+  </div>
 </section>
 
 </main>
@@ -710,11 +756,215 @@ footer {
 
 <footer>
   <span>© 2026 — SALIH.</span>
-  <span>INDEPENDENT CREATIVE JOURNAL</span>
-  <span>MUNICH, DE</span>
+  <span data-i18n="footer">INDEPENDENT CREATIVE JOURNAL</span>
+  <span data-i18n="footerLocation">MUNICH, DE</span>
 </footer>
 
 <script>
+const translations = {
+  en: {
+    languageName: "ENGLISH",
+    introText: "AN INDEPENDENT VISUAL JOURNAL",
+    navWork: "Selected Work",
+    navAbout: "About",
+    navContact: "Contact",
+    volume: "VOL. 01 — 2026",
+    visualCulture: "VISUAL CULTURE / PERSONAL ARCHIVE",
+    journalAbout: "ABOUT THE JOURNAL",
+    journalDescription: "A personal exploration of aesthetics, identity, visual culture and contemporary life.",
+    interests: "CREATIVE INTERESTS",
+    interestList: "Photography<br>Architecture<br>Design<br>Visual storytelling",
+    portrait: "FIG. 001 — PORTRAIT STUDY",
+    location: "MUNICH, GERMANY",
+    manifestoLabel: "A PERSONAL MANIFESTO",
+    manifestoTitle: "Beauty lies in the details.<br><em>Meaning lies beneath.</em>",
+    manifestoText: "An ongoing exploration of the relationship between visual expression, culture, architecture and everyday life.",
+    workTitle: "Selected Work",
+    archive: "AN ONGOING ARCHIVE — 001 / 004",
+    category1: "ARCHITECTURE",
+    project1: "Urban Perspectives",
+    category2: "FASHION / ART DIRECTION",
+    project2: "Visual Identity",
+    category3: "PHOTOGRAPHY",
+    project3: "Quiet Moments",
+    category4: "CREATIVE STUDIES",
+    project4: "Beyond Form",
+    aboutLabel: "A LITTLE ABOUT ME — 001",
+    aboutTitle: "Observing<br>the <em>world</em><br>differently.",
+    about1: "I am an independent creative based in Munich, interested in photography, architecture, visual culture and design.",
+    about2: "I find inspiration in the ordinary: the geometry of a building, the character of a photograph, the atmosphere of a place and the stories hidden in everyday life.",
+    about3: "This journal is a collection of observations, experiments and creative explorations.",
+    contactLabel: "FOR COLLABORATIONS & INQUIRIES",
+    contactTitle: "Let's start<br><em>a conversation.</em>",
+    getInTouch: "GET IN TOUCH ↗",
+    linkedin: "A CONNECTION WORTH MAKING ↗",
+    footer: "INDEPENDENT CREATIVE JOURNAL",
+    footerLocation: "MUNICH, DE"
+  },
+
+  de: {
+    languageName: "DEUTSCH",
+    introText: "UNABHÄNGIGES VISUELLES JOURNAL",
+    navWork: "Ausgewählte Arbeiten",
+    navAbout: "Über mich",
+    navContact: "Kontakt",
+    volume: "VOL. 01 — 2026",
+    visualCulture: "VISUELLE KULTUR / PERSÖNLICHES ARCHIV",
+    journalAbout: "ÜBER DAS JOURNAL",
+    journalDescription: "Eine persönliche Auseinandersetzung mit Ästhetik, Identität, visueller Kultur und dem zeitgenössischen Leben.",
+    interests: "KREATIVE INTERESSEN",
+    interestList: "Fotografie<br>Architektur<br>Design<br>Visuelles Storytelling",
+    portrait: "ABB. 001 — PORTRÄTSTUDIE",
+    location: "MÜNCHEN, DEUTSCHLAND",
+    manifestoLabel: "EIN PERSÖNLICHES MANIFEST",
+    manifestoTitle: "Schönheit liegt im Detail.<br><em>Bedeutung liegt darunter.</em>",
+    manifestoText: "Eine fortlaufende Auseinandersetzung mit dem Verhältnis zwischen visuellem Ausdruck, Kultur, Architektur und Alltag.",
+    workTitle: "Ausgewählte Arbeiten",
+    archive: "EIN FORTLAUFENDES ARCHIV — 001 / 004",
+    category1: "ARCHITEKTUR",
+    project1: "Urbane Perspektiven",
+    category2: "MODE / ART DIRECTION",
+    project2: "Visuelle Identität",
+    category3: "FOTOGRAFIE",
+    project3: "Stille Momente",
+    category4: "KREATIVE STUDIEN",
+    project4: "Jenseits der Form",
+    aboutLabel: "EIN WENIG ÜBER MICH — 001",
+    aboutTitle: "Die Welt<br><em>anders</em><br>betrachten.",
+    about1: "Ich bin ein unabhängiger Kreativer mit Sitz in München und interessiere mich für Fotografie, Architektur, visuelle Kultur und Design.",
+    about2: "Inspiration finde ich im Alltäglichen: in der Geometrie eines Gebäudes, dem Charakter einer Fotografie, der Atmosphäre eines Ortes und den Geschichten des täglichen Lebens.",
+    about3: "Dieses Journal ist eine Sammlung von Beobachtungen, Experimenten und kreativen Entdeckungen.",
+    contactLabel: "FÜR ZUSAMMENARBEITEN & ANFRAGEN",
+    contactTitle: "Lass uns<br><em>ins Gespräch kommen.</em>",
+    getInTouch: "KONTAKT AUFNEHMEN ↗",
+    linkedin: "EINE VERBINDUNG, DIE SICH LOHNT ↗",
+    footer: "UNABHÄNGIGES KREATIVES JOURNAL",
+    footerLocation: "MÜNCHEN, DE"
+  },
+
+  tr: {
+    languageName: "TÜRKÇE",
+    introText: "BAĞIMSIZ GÖRSEL GÜNLÜK",
+    navWork: "Seçili İşler",
+    navAbout: "Hakkımda",
+    navContact: "İletişim",
+    volume: "CİLT 01 — 2026",
+    visualCulture: "GÖRSEL KÜLTÜR / KİŞİSEL ARŞİV",
+    journalAbout: "GÜNLÜK HAKKINDA",
+    journalDescription: "Estetik, kimlik, görsel kültür ve çağdaş yaşam üzerine kişisel bir keşif.",
+    interests: "YARATICI İLGİ ALANLARI",
+    interestList: "Fotoğrafçılık<br>Mimarlık<br>Tasarım<br>Görsel hikâye anlatımı",
+    portrait: "GÖRSEL 001 — PORTRE ÇALIŞMASI",
+    location: "MÜNİH, ALMANYA",
+    manifestoLabel: "KİŞİSEL MANİFESTO",
+    manifestoTitle: "Güzellik detaylarda saklıdır.<br><em>Anlam ise derinlerde.</em>",
+    manifestoText: "Görsel ifade, kültür, mimarlık ve gündelik yaşam arasındaki ilişki üzerine süregelen bir keşif.",
+    workTitle: "Seçili İşler",
+    archive: "SÜREKLİ GELİŞEN BİR ARŞİV — 001 / 004",
+    category1: "MİMARLIK",
+    project1: "Kentsel Perspektifler",
+    category2: "MODA / SANAT YÖNETİMİ",
+    project2: "Görsel Kimlik",
+    category3: "FOTOĞRAFÇILIK",
+    project3: "Sessiz Anlar",
+    category4: "YARATICI ÇALIŞMALAR",
+    project4: "Formun Ötesinde",
+    aboutLabel: "HAKKIMDA — 001",
+    aboutTitle: "Dünyaya<br><em>farklı</em><br>bakmak.",
+    about1: "Münih merkezli bağımsız bir yaratıcı olarak fotoğrafçılık, mimarlık, görsel kültür ve tasarımla ilgileniyorum.",
+    about2: "İlhamımı sıradan olanın içinde buluyorum: bir binanın geometrisinde, bir fotoğrafın karakterinde, bir mekânın atmosferinde ve gündelik hayatın gizli hikâyelerinde.",
+    about3: "Bu günlük; gözlemlerimin, deneylerimin ve yaratıcı keşiflerimin bir araya geldiği bir koleksiyon.",
+    contactLabel: "İŞ BİRLİKLERİ VE İLETİŞİM",
+    contactTitle: "Bir sohbetle<br><em>başlayalım.</em>",
+    getInTouch: "İLETİŞİME GEÇ ↗",
+    linkedin: "KURMAYA DEĞER BİR BAĞLANTI ↗",
+    footer: "BAĞIMSIZ YARATICI GÜNLÜK",
+    footerLocation: "MÜNİH, ALMANYA"
+  },
+
+  fr: {
+    languageName: "FRANÇAIS",
+    introText: "JOURNAL VISUEL INDÉPENDANT",
+    navWork: "Projets sélectionnés",
+    navAbout: "À propos",
+    navContact: "Contact",
+    volume: "VOL. 01 — 2026",
+    visualCulture: "CULTURE VISUELLE / ARCHIVE PERSONNELLE",
+    journalAbout: "À PROPOS DU JOURNAL",
+    journalDescription: "Une exploration personnelle de l'esthétique, de l'identité, de la culture visuelle et de la vie contemporaine.",
+    interests: "CENTRES D'INTÉRÊT CRÉATIFS",
+    interestList: "Photographie<br>Architecture<br>Design<br>Narration visuelle",
+    portrait: "FIG. 001 — ÉTUDE DE PORTRAIT",
+    location: "MUNICH, ALLEMAGNE",
+    manifestoLabel: "UN MANIFESTE PERSONNEL",
+    manifestoTitle: "La beauté réside dans les détails.<br><em>Le sens se trouve en profondeur.</em>",
+    manifestoText: "Une exploration continue du lien entre expression visuelle, culture, architecture et vie quotidienne.",
+    workTitle: "Projets sélectionnés",
+    archive: "UNE ARCHIVE EN ÉVOLUTION — 001 / 004",
+    category1: "ARCHITECTURE",
+    project1: "Perspectives urbaines",
+    category2: "MODE / DIRECTION ARTISTIQUE",
+    project2: "Identité visuelle",
+    category3: "PHOTOGRAPHIE",
+    project3: "Instants silencieux",
+    category4: "ÉTUDES CRÉATIVES",
+    project4: "Au-delà de la forme",
+    aboutLabel: "QUELQUES MOTS SUR MOI — 001",
+    aboutTitle: "Regarder<br>le <em>monde</em><br>autrement.",
+    about1: "Je suis un créatif indépendant basé à Munich, passionné par la photographie, l'architecture, la culture visuelle et le design.",
+    about2: "Je trouve mon inspiration dans l'ordinaire : la géométrie d'un bâtiment, le caractère d'une photographie, l'atmosphère d'un lieu et les histoires cachées du quotidien.",
+    about3: "Ce journal rassemble mes observations, mes expériences et mes explorations créatives.",
+    contactLabel: "COLLABORATIONS & DEMANDES",
+    contactTitle: "Commençons<br><em>une conversation.</em>",
+    getInTouch: "ME CONTACTER ↗",
+    linkedin: "UNE CONNEXION QUI EN VAUT LA PEINE ↗",
+    footer: "JOURNAL CRÉATIF INDÉPENDANT",
+    footerLocation: "MUNICH, DE"
+  }
+};
+
+function applyLanguage(lang) {
+  const t = translations[lang] || translations.en;
+
+  document.documentElement.lang = lang;
+  document.title = t.title || "Salih. — Visual Journal";
+
+  document.getElementById("currentLanguage").textContent = t.languageName;
+
+  document.querySelectorAll("[data-i18n]").forEach(element => {
+    const key = element.dataset.i18n;
+    if (t[key] !== undefined) {
+      element.innerHTML = t[key];
+    }
+  });
+
+  document.querySelectorAll(".language-switch button").forEach(button => {
+    const active = button.dataset.lang === lang;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
+  });
+}
+
+const supportedLanguages = ["en", "de", "tr", "fr"];
+const savedLanguage = localStorage.getItem("salih-language");
+const initialLanguage = supportedLanguages.includes(savedLanguage)
+  ? savedLanguage
+  : "en";
+
+applyLanguage(initialLanguage);
+
+document.querySelectorAll(".language-switch button").forEach(button => {
+  button.addEventListener("click", () => {
+    const selectedLanguage = button.dataset.lang;
+
+    if (!supportedLanguages.includes(selectedLanguage)) return;
+    if (selectedLanguage === localStorage.getItem("salih-language")) return;
+
+    localStorage.setItem("salih-language", selectedLanguage);
+    location.reload();
+  });
+});
+
 window.addEventListener("load", function() {
   setTimeout(function() {
     document.getElementById("intro").classList.add("hide");
@@ -724,5 +974,3 @@ window.addEventListener("load", function() {
 
 </body>
 </html>
-
-
