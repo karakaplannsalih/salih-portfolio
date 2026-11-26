@@ -1,25 +1,21 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Salih. — Creative Portfolio</title>
-
-<meta name="description" content="Salih — Independent Creative Portfolio based in Munich.">
+<title>Salih. — Visual Journal</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
 <style>
-
-/* =========================
-   GLOBAL
-========================= */
+:root {
+  --paper: #eeeDE8;
+  --ink: #171717;
+  --muted: #77756f;
+  --line: #c9c7c0;
+}
 
 * {
   margin: 0;
@@ -27,18 +23,12 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
-  background: #f7f7f4;
-  color: #171717;
+  background: var(--paper);
+  color: var(--ink);
   font-family: 'DM Sans', sans-serif;
-}
-
-body.loading {
-  overflow: hidden;
 }
 
 a {
@@ -46,800 +36,643 @@ a {
   text-decoration: none;
 }
 
-img {
-  display: block;
-  max-width: 100%;
-}
+/* INTRO */
 
-::selection {
-  background: #171717;
-  color: #fff;
-}
-
-
-/* =========================
-   CINEMATIC INTRO
-========================= */
-
-.intro-screen {
+.intro {
   position: fixed;
   inset: 0;
-  z-index: 9999;
-  background: #101010;
-
+  z-index: 1000;
+  background: var(--ink);
+  color: var(--paper);
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-
-  transition:
-    opacity 1s ease,
-    visibility 1s ease;
+  align-items: center;
+  flex-direction: column;
+  transition: opacity 1s, visibility 1s;
 }
 
-.intro-screen.hidden {
+.intro.hide {
   opacity: 0;
   visibility: hidden;
-  pointer-events: none;
 }
 
-.intro-name {
-  color: #f7f7f4;
-  font-size: clamp(65px, 10vw, 120px);
+.intro h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(65px, 12vw, 130px);
   font-weight: 400;
-  letter-spacing: -7px;
-
-  opacity: 0;
-  transform: translateY(25px);
-
-  animation: revealName 1.3s ease forwards;
+  letter-spacing: -5px;
+  animation: introText 1.4s ease both;
 }
 
-.intro-line {
-  width: 0;
-  height: 1px;
-  background: #aaa;
-  margin-top: 28px;
-
-  animation: expandLine 1.2s ease .5s forwards;
-}
-
-.intro-caption {
-  color: #888;
+.intro p {
   font-size: 9px;
   letter-spacing: 4px;
-  margin-top: 22px;
-
+  margin-top: 25px;
   opacity: 0;
-  animation: revealCaption 1s ease 1s forwards;
+  animation: fadeIn 1s ease .7s forwards;
 }
 
-@keyframes revealName {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes introText {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes expandLine {
-  to {
-    width: 180px;
-  }
+@keyframes fadeIn {
+  to { opacity: 1; }
 }
 
-@keyframes revealCaption {
-  to {
-    opacity: 1;
-  }
-}
-
-
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
 header {
-  padding: 27px 7%;
-
+  padding: 23px 5%;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-
-  border-bottom: 1px solid #deded9;
-  position: relative;
-  z-index: 100;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
 }
 
 .logo {
-  font-size: 23px;
-  font-weight: 600;
-  letter-spacing: -1.5px;
+  font-family: 'Playfair Display', serif;
+  font-size: 27px;
+}
+
+.header-note {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--muted);
 }
 
 nav {
   display: flex;
-  gap: 38px;
+  gap: 30px;
 }
 
 nav a {
   font-size: 10px;
-  letter-spacing: 1.5px;
   text-transform: uppercase;
-  transition: opacity .3s;
+  letter-spacing: 1.5px;
 }
 
-nav a:hover {
-  opacity: .45;
-}
-
-.menu-btn {
-  display: none;
-  border: none;
-  background: none;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-
-/* =========================
-   HERO
-========================= */
+/* HERO */
 
 .hero {
-  min-height: 85vh;
-  padding: 65px 7%;
-
-  display: grid;
-  grid-template-columns: 1fr .85fr;
-  align-items: center;
-  gap: 55px;
-
-  overflow: hidden;
+  padding: 45px 5% 90px;
 }
 
-.hero-content {
-  position: relative;
-  z-index: 2;
-
-  animation: heroReveal 1.2s ease .3s both;
+.hero-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  margin-bottom: 25px;
 }
 
-@keyframes heroReveal {
-  from {
-    opacity: 0;
-    transform: translateY(25px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.eyebrow {
-  font-size: 10px;
-  letter-spacing: 3px;
-  color: #888;
-  text-transform: uppercase;
-}
-
-.main-title {
-  font-size: clamp(80px, 11vw, 165px);
-  font-weight: 400;
-  letter-spacing: -10px;
-  line-height: .9;
-  margin: 40px 0;
-}
-
-.main-title span {
+.hero-title {
   font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  font-size: clamp(90px, 19vw, 270px);
+  letter-spacing: -12px;
+  line-height: .8;
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.hero-title span {
   font-style: italic;
 }
 
-.hero-content p {
-  max-width: 350px;
-  color: #777;
-  font-size: 14px;
-  line-height: 1.9;
+.hero-layout {
+  display: grid;
+  grid-template-columns: .7fr 1.5fr .7fr;
+  gap: 30px;
+  align-items: end;
 }
 
-.explore {
-  display: inline-block;
-  margin-top: 40px;
-  padding-bottom: 9px;
+.hero-side {
+  font-size: 11px;
+  line-height: 1.9;
+  color: var(--muted);
+}
 
-  border-bottom: 1px solid #171717;
-
+.hero-side strong {
+  color: var(--ink);
+  display: block;
   font-size: 10px;
   letter-spacing: 2px;
-
-  transition: opacity .3s;
+  margin-bottom: 15px;
 }
 
-.explore:hover {
-  opacity: .5;
-}
-
-.hero-image {
-  height: 720px;
+.portrait {
+  height: 650px;
   overflow: hidden;
-  background: #111;
-
-  animation: imageReveal 1.5s ease .4s both;
+  background: #ccc;
 }
 
-@keyframes imageReveal {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.hero-image img {
+.portrait img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center 35%;
-
-  transition: transform 1s ease;
+  transition: transform 1s;
 }
 
-.hero-image:hover img {
+.portrait:hover img {
   transform: scale(1.025);
 }
 
-
-/* =========================
-   PROJECTS
-========================= */
-
-section {
-  padding: 100px 7%;
-}
-
-.section-title {
+.hero-bottom {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 45px;
+  margin-top: 15px;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: var(--muted);
 }
 
-.section-title h2 {
-  font-size: 35px;
+/* MANIFESTO */
+
+.manifesto {
+  padding: 120px 12%;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  text-align: center;
+}
+
+.manifesto-label {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--muted);
+  margin-bottom: 35px;
+}
+
+.manifesto h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(40px, 6vw, 85px);
   font-weight: 400;
-  letter-spacing: -1.5px;
+  line-height: 1.15;
 }
 
-.section-title span {
-  font-size: 10px;
-  color: #888;
-  letter-spacing: 1px;
+.manifesto h2 em {
+  font-weight: 400;
 }
 
-.projects {
+.manifesto p {
+  max-width: 420px;
+  margin: 35px auto 0;
+  font-size: 12px;
+  line-height: 2;
+  color: var(--muted);
+}
+
+/* WORK */
+
+.work {
+  padding: 100px 5%;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 20px;
+  margin-bottom: 55px;
+}
+
+.section-heading h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 55px;
+  font-weight: 400;
+}
+
+.section-heading span {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--muted);
+}
+
+.gallery {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px 25px;
+  gap: 90px 35px;
 }
 
-.project {
+.item:nth-child(even) {
+  margin-top: 110px;
+}
+
+.item-image {
   overflow: hidden;
+  background: #ddd;
+  aspect-ratio: 4 / 5;
 }
 
-.project-image {
-  overflow: hidden;
-  background: #e5e5e0;
-  aspect-ratio: 4 / 3;
+.item:nth-child(2) .item-image {
+  aspect-ratio: 4 / 5;
 }
 
-.project-image img {
+.item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-
-  transition: transform .7s ease;
+  transition: transform .8s;
 }
 
-.project:hover .project-image img {
+.item:hover img {
   transform: scale(1.04);
 }
 
-.project-info {
+.item-meta {
   display: flex;
   justify-content: space-between;
-  padding-top: 20px;
+  margin-top: 17px;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 1px;
 }
 
-.project-info h3 {
-  font-size: 17px;
-  font-weight: 500;
+.item h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 25px;
+  font-weight: 400;
+  margin-top: 9px;
 }
 
-.project-info p {
-  font-size: 11px;
-  color: #888;
-  margin-top: 7px;
-}
-
-.project-number {
-  font-size: 11px;
-  color: #888;
-}
-
-
-/* =========================
-   ABOUT
-========================= */
+/* ABOUT */
 
 .about {
-  background: #eaeae5;
-
+  background: #deddd6;
+  padding: 110px 10%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
+  gap: 90px;
+}
+
+.about-heading {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--muted);
 }
 
 .about h2 {
-  font-size: clamp(45px, 6vw, 78px);
-  line-height: 1.05;
-  letter-spacing: -3px;
-  font-weight: 400;
-  margin-top: 30px;
-}
-
-.about h2 span {
   font-family: 'Playfair Display', serif;
-  font-style: italic;
-}
-
-.about-text {
-  font-size: 14px;
-  line-height: 2;
-  color: #666;
-}
-
-.about-text p + p {
-  margin-top: 22px;
-}
-
-
-/* =========================
-   CONTACT
-========================= */
-
-.contact {
-  text-align: center;
-  padding: 140px 7%;
-}
-
-.contact h2 {
-  font-size: clamp(50px, 8vw, 105px);
-  letter-spacing: -5px;
+  font-size: clamp(45px, 6vw, 80px);
   line-height: 1;
   font-weight: 400;
   margin-top: 35px;
 }
 
-.contact h2 span {
+.about h2 em {
+  font-weight: 400;
+}
+
+.about-copy {
+  align-self: center;
+  font-size: 13px;
+  line-height: 2.1;
+  color: #65635d;
+}
+
+.about-copy p + p {
+  margin-top: 25px;
+}
+
+/* CONTACT */
+
+.contact {
+  text-align: center;
+  padding: 150px 5%;
+}
+
+.contact-label {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--muted);
+}
+
+.contact h2 {
   font-family: 'Playfair Display', serif;
-  font-style: italic;
+  font-size: clamp(60px, 10vw, 140px);
+  font-weight: 400;
+  line-height: 1;
+  margin-top: 30px;
+}
+
+.contact h2 em {
+  font-weight: 400;
 }
 
 .contact a {
   display: inline-block;
   margin-top: 45px;
-
-  border-bottom: 1px solid #171717;
-  padding-bottom: 9px;
-
-  font-size: 11px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid;
+  font-size: 10px;
   letter-spacing: 2px;
-
-  transition: opacity .3s;
 }
 
-.contact a:hover {
-  opacity: .5;
-}
-
-
-/* =========================
-   FOOTER
-========================= */
+/* FOOTER */
 
 footer {
-  padding: 30px 7%;
-  border-top: 1px solid #deded9;
-
+  border-top: 1px solid var(--line);
+  padding: 25px 5%;
   display: flex;
   justify-content: space-between;
-
-  font-size: 10px;
-  color: #888;
-  letter-spacing: 1px;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: var(--muted);
 }
 
-
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media(max-width: 700px) {
-
   header {
-    padding: 24px 6%;
+    padding: 20px 6%;
   }
 
-  .menu-btn {
-    display: block;
+  .header-note {
+    display: none;
   }
 
   nav {
-    display: none;
-
-    position: absolute;
-    top: 75px;
-    right: 6%;
-
-    background: #f7f7f4;
-    border: 1px solid #ddd;
-
-    padding: 25px;
-
-    flex-direction: column;
-    gap: 25px;
+    gap: 14px;
   }
 
-  nav.active {
-    display: flex;
+  nav a {
+    font-size: 8px;
   }
 
   .hero {
-    grid-template-columns: 1fr;
-    padding: 75px 6%;
-    gap: 45px;
+    padding: 45px 6% 70px;
   }
 
-  .main-title {
-    font-size: 105px;
+  .hero-title {
+    font-size: 23vw;
     letter-spacing: -6px;
-    margin: 35px 0;
+    margin: 50px 0 35px;
   }
 
-  .hero-image {
-    height: 580px;
+  .hero-layout {
+    grid-template-columns: 1fr;
+    gap: 25px;
   }
 
-  section {
+  .portrait {
+    height: 570px;
+  }
+
+  .hero-side {
+    max-width: 280px;
+  }
+
+  .hero-side:last-child {
+    display: none;
+  }
+
+  .manifesto {
+    padding: 90px 8%;
+  }
+
+  .work {
     padding: 75px 6%;
   }
 
-  .projects {
+  .section-heading h2 {
+    font-size: 40px;
+  }
+
+  .gallery {
     grid-template-columns: 1fr;
-    gap: 45px;
+    gap: 55px;
+  }
+
+  .item:nth-child(even) {
+    margin-top: 0;
   }
 
   .about {
     grid-template-columns: 1fr;
-    gap: 40px;
+    padding: 85px 8%;
+    gap: 45px;
   }
 
   .contact {
-    padding: 110px 6%;
-  }
-
-  .contact h2 {
-    letter-spacing: -3px;
+    padding: 100px 6%;
   }
 
   footer {
     padding: 25px 6%;
-    gap: 20px;
+    gap: 15px;
     flex-wrap: wrap;
   }
 }
 
-
-/* REDUCED MOTION */
-
 @media(prefers-reduced-motion: reduce) {
-
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
     scroll-behavior: auto !important;
   }
-
 }
-
 </style>
 </head>
 
+<body>
 
-<body class="loading">
+<!-- INTRO -->
 
-
-<!-- =========================
-     INTRO SCREEN
-========================= -->
-
-<div class="intro-screen" id="intro">
-
-  <div class="intro-name">Salih.</div>
-
-  <div class="intro-line"></div>
-
-  <div class="intro-caption">
-    INDEPENDENT CREATIVE — MUNICH
-  </div>
-
+<div class="intro" id="intro">
+  <h1>Salih.</h1>
+  <p>AN INDEPENDENT VISUAL JOURNAL</p>
 </div>
 
-
-<!-- =========================
-     HEADER
-========================= -->
+<!-- HEADER -->
 
 <header>
-
   <a href="#" class="logo">Salih.</a>
-
-  <button
-    class="menu-btn"
-    onclick="toggleMenu()"
-    aria-label="Toggle navigation"
-    aria-expanded="false"
-    id="menuButton"
-  >
-    ☰
-  </button>
-
-  <nav id="navigation">
-
-    <a href="#work" onclick="closeMenu()">Work</a>
-
-    <a href="#about" onclick="closeMenu()">About</a>
-
-    <a href="#contact" onclick="closeMenu()">Contact</a>
-
+  <div class="header-note">INDEPENDENT CREATIVE JOURNAL</div>
+  <nav>
+    <a href="#work">Selected Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
   </nav>
-
 </header>
-
 
 <main>
 
+<!-- HERO -->
 
-<!-- =========================
-     HERO
-========================= -->
+<section class="hero">
 
-<div class="hero">
+  <div class="hero-meta">
+    <span>VOL. 01 — 2026</span>
+    <span>VISUAL CULTURE / PERSONAL ARCHIVE</span>
+  </div>
 
-  <div class="hero-content">
+  <h1 class="hero-title">Salih<span>.</span></h1>
 
-    <div class="eyebrow">
-      INDEPENDENT CREATIVE — MUNICH
+  <div class="hero-layout">
+
+    <div class="hero-side">
+      <strong>ABOUT THE JOURNAL</strong>
+      A personal exploration of
+      aesthetics, identity, visual
+      culture and contemporary life.
     </div>
 
-    <h1 class="main-title">
-      Salih<span>.</span>
-    </h1>
-
-    <p>
-      Exploring photography, visual culture,
-      architecture and creative expression.
-      Based in Munich, Germany.
-    </p>
-
-    <a href="#work" class="explore">
-      EXPLORE MY WORK ↗
-    </a>
-
-  </div>
-
-
-  <div class="hero-image">
-
-    <img
-      src="https://raw.githubusercontent.com/karakaplannsalih/salih-portfolio/main/406013A9-2883-485C-AD9F-4BD9A7340CC7.PNG"
-      alt="Salih — Portrait"
-    >
-
-  </div>
-
-</div>
-
-
-<!-- =========================
-     WORK
-========================= -->
-
-<section id="work">
-
-  <div class="section-title">
-
-    <h2>Selected Work</h2>
-
-    <span>01 — 04</span>
-
-  </div>
-
-
-  <div class="projects">
-
-
-    <article class="project">
-
-      <div class="project-image">
-
+    <div>
+      <div class="portrait">
         <img
-          src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=1200"
-          alt="Urban architecture"
-          loading="lazy"
+          src="https://raw.githubusercontent.com/karakaplannsalih/salih-portfolio/main/406013A9-2883-485C-AD9F-4BD9A7340CC7.PNG"
+          alt="Salih portrait"
         >
-
       </div>
 
-      <div class="project-info">
-
-        <div>
-          <h3>Urban Perspectives</h3>
-          <p>Photography / Architecture</p>
-        </div>
-
-        <span class="project-number">01</span>
-
+      <div class="hero-bottom">
+        <span>FIG. 001 — PORTRAIT STUDY</span>
+        <span>MUNICH, GERMANY</span>
       </div>
+    </div>
 
-    </article>
-
-
-    <article class="project">
-
-      <div class="project-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200"
-          alt="Fashion editorial"
-          loading="lazy"
-        >
-
-      </div>
-
-      <div class="project-info">
-
-        <div>
-          <h3>Visual Identity</h3>
-          <p>Art Direction / Fashion</p>
-        </div>
-
-        <span class="project-number">02</span>
-
-      </div>
-
-    </article>
-
-
-    <article class="project">
-
-      <div class="project-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1200"
-          alt="Landscape photography"
-          loading="lazy"
-        >
-
-      </div>
-
-      <div class="project-info">
-
-        <div>
-          <h3>Quiet Moments</h3>
-          <p>Photography / Travel</p>
-        </div>
-
-        <span class="project-number">03</span>
-
-      </div>
-
-    </article>
-
-
-    <article class="project">
-
-      <div class="project-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1200"
-          alt="Creative art"
-          loading="lazy"
-        >
-
-      </div>
-
-      <div class="project-info">
-
-        <div>
-          <h3>Creative Studies</h3>
-          <p>Design / Experimentation</p>
-        </div>
-
-        <span class="project-number">04</span>
-
-      </div>
-
-    </article>
-
+    <div class="hero-side">
+      <strong>CREATIVE INTERESTS</strong>
+      Photography<br>
+      Architecture<br>
+      Design<br>
+      Visual storytelling
+    </div>
 
   </div>
 
 </section>
 
+<!-- MANIFESTO -->
 
-<!-- =========================
-     ABOUT
-========================= -->
+<section class="manifesto">
+
+  <div class="manifesto-label">
+    A PERSONAL MANIFESTO
+  </div>
+
+  <h2>
+    Beauty lies in the details.<br>
+    <em>Meaning lies beneath.</em>
+  </h2>
+
+  <p>
+    An ongoing exploration of the relationship
+    between visual expression, culture,
+    architecture and everyday life.
+  </p>
+
+</section>
+
+<!-- WORK -->
+
+<section class="work" id="work">
+
+  <div class="section-heading">
+    <h2>Selected Work</h2>
+    <span>AN ONGOING ARCHIVE — 001 / 004</span>
+  </div>
+
+  <div class="gallery">
+
+    <article class="item">
+      <div class="item-image">
+        <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=1200" alt="Architecture" loading="lazy">
+      </div>
+      <div class="item-meta">
+        <span>ARCHITECTURE</span>
+        <span>001</span>
+      </div>
+      <h3>Urban Perspectives</h3>
+    </article>
+
+    <article class="item">
+      <div class="item-image">
+        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200" alt="Fashion" loading="lazy">
+      </div>
+      <div class="item-meta">
+        <span>FASHION / ART DIRECTION</span>
+        <span>002</span>
+      </div>
+      <h3>Visual Identity</h3>
+    </article>
+
+    <article class="item">
+      <div class="item-image">
+        <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1200" alt="Landscape" loading="lazy">
+      </div>
+      <div class="item-meta">
+        <span>PHOTOGRAPHY</span>
+        <span>003</span>
+      </div>
+      <h3>Quiet Moments</h3>
+    </article>
+
+    <article class="item">
+      <div class="item-image">
+        <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1200" alt="Art" loading="lazy">
+      </div>
+      <div class="item-meta">
+        <span>CREATIVE STUDIES</span>
+        <span>004</span>
+      </div>
+      <h3>Beyond Form</h3>
+    </article>
+
+  </div>
+
+</section>
+
+<!-- ABOUT -->
 
 <section class="about" id="about">
 
   <div>
-
-    <div class="eyebrow">
-      A LITTLE ABOUT ME
-    </div>
-
+    <div class="about-heading">A LITTLE ABOUT ME — 001</div>
     <h2>
-      Curiosity<br>
-      creates <span>perspective.</span>
+      Observing<br>
+      the <em>world</em><br>
+      differently.
     </h2>
-
   </div>
 
-
-  <div class="about-text">
-
+  <div class="about-copy">
     <p>
-      I am an independent creative interested
-      in visual culture, photography,
-      architecture and the relationship
-      between aesthetics and everyday life.
+      I am an independent creative based in Munich,
+      interested in photography, architecture,
+      visual culture and design.
     </p>
 
     <p>
-      My work is driven by curiosity,
-      observation and a constant desire
-      to explore new perspectives.
+      I find inspiration in the ordinary:
+      the geometry of a building, the character
+      of a photograph, the atmosphere of a place
+      and the stories hidden in everyday life.
     </p>
 
+    <p>
+      This journal is a collection of observations,
+      experiments and creative explorations.
+    </p>
   </div>
 
 </section>
 
-
-<!-- =========================
-     CONTACT
-========================= -->
+<!-- CONTACT -->
 
 <section class="contact" id="contact">
 
-  <div class="eyebrow">
-    HAVE A PROJECT IN MIND?
+  <div class="contact-label">
+    FOR COLLABORATIONS & INQUIRIES
   </div>
 
   <h2>
-    Let's create<br>
-    <span>something.</span>
+    Let's start<br>
+    <em>a conversation.</em>
   </h2>
 
   <a href="mailto:hello@example.com">
@@ -848,76 +681,25 @@ footer {
 
 </section>
 
-
 </main>
 
-
-<!-- =========================
-     FOOTER
-========================= -->
+<!-- FOOTER -->
 
 <footer>
-
   <span>© 2026 — SALIH.</span>
-
-  <span>BASED IN MUNICH</span>
-
+  <span>INDEPENDENT CREATIVE JOURNAL</span>
+  <span>MUNICH, DE</span>
 </footer>
 
-
-<!-- =========================
-     JAVASCRIPT
-========================= -->
-
 <script>
-
-/* MOBILE MENU */
-
-function toggleMenu() {
-
-  const nav = document.getElementById("navigation");
-  const button = document.getElementById("menuButton");
-
-  nav.classList.toggle("active");
-
-  button.setAttribute(
-    "aria-expanded",
-    nav.classList.contains("active")
-  );
-
-}
-
-function closeMenu() {
-
-  document
-    .getElementById("navigation")
-    .classList.remove("active");
-
-  document
-    .getElementById("menuButton")
-    .setAttribute("aria-expanded", "false");
-
-}
-
-
-/* CINEMATIC INTRO */
-
 window.addEventListener("load", function() {
-
-  const intro = document.getElementById("intro");
-
   setTimeout(function() {
-
-    intro.classList.add("hidden");
-
-    document.body.classList.remove("loading");
-
-  }, 2500);
-
+    document.getElementById("intro").classList.add("hide");
+  }, 2200);
 });
-
 </script>
 
 </body>
 </html>
+
 
